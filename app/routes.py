@@ -1,17 +1,12 @@
-from fastapi import APIRouter
+from app import config
+from fastapi import APIRouter, Request
+from fastapi.templating import Jinja2Templates
 
+
+templates = Jinja2Templates(directory=config.Settings().TEMPLATE_DIR)
 router = APIRouter()
 
 
 @router.get("/")
-def index():
-    return """
-        <html>
-            <head>
-                <title>Simple Site</title>
-            </head>
-            <body>
-                <h1>Hello World!</h1>
-            </body>
-        </html>
-        """
+def index(request: Request):
+    return templates.TemplateResponse('shared/_base.html', {'request': request})

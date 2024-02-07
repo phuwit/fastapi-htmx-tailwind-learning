@@ -17,7 +17,7 @@ First things first, if you haven't already, make sure that Jinja is installed.
 
 > Note: If you're using Codespaces, you will not need to install dependencies
 
-```
+```bash
 python -m pip install Jinja2
 ```
 
@@ -37,7 +37,7 @@ To get started, create a `shared` folder within your `templates` directory, and 
 
 Within that file, create a basic html file (it might look a little like this):
 
-```
+```jinja
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -69,7 +69,7 @@ The FastAPI documentation provides instructions on how to use Jinja.
 
 In practice, it looks something like this:
 
-```
+```py
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
 
@@ -93,7 +93,7 @@ Within your `static` directory, create a new `css` folder, and within it, create
 
 Write some basic css (this will be overwritten later). Here's an example:
 
-```
+```css
 html {
     background-color: #00539f;
   }
@@ -134,7 +134,7 @@ The `url_for()` method looks for a static directory called `static` which has al
 
 Lastly, in the `templates` directory, create a `main.html` file. This is where you can harness the real power of Jinja templates. In this file, write the following:
 
-```
+```jinja
 {% extends "/shared/_base.html" %}
 
 {% block content %}
@@ -180,7 +180,7 @@ The "context" here is very important. Think of it as the data that you want to p
 
 For example, look at this template response:
 
-```
+```py
 @router.get("/")
 def index(request: Request):
     return templates.TemplateResponse(
@@ -196,7 +196,7 @@ The dictionary that includes the `request` and `age` keys is considered the "con
 
 In a Jinja template, you can then access the _value_ of `age` using an expression.
 
-```
+```jinja
 <p>The answer is {{ age }}.<p>
 ```
 Which would ultimately be rendered as:
@@ -211,7 +211,7 @@ There's much more to Jinja templates, but it's vital to understand those three k
 
 You can run your app at any time to see if everything is working as intended. However, `uvicorn` can watch for changes in your app and restart the server automatically, so you don't have to keep running the command.
 
-```
+```bash
 uvicorn app.main:app --reload
 ```
 
