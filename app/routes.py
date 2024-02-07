@@ -9,4 +9,4 @@ router = APIRouter()
 
 @router.get("/")
 def index(request: Request):
-    return templates.TemplateResponse('shared/_base.html', {'request': request})
+    return templates.TemplateResponse('main.html', {'request': request})
